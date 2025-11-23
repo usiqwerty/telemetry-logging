@@ -1,3 +1,8 @@
+using Elastic.Channels;
+using Elastic.Ingest.Elasticsearch;
+using Elastic.Ingest.Elasticsearch.DataStreams;
+using Elastic.Transport;
+using Elastic.Serilog.Sinks;    
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -15,7 +20,7 @@ try
 
     builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
         loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
-    builder.Services.AddSerilog();
+    builder.Services.AddSerilog(Log.Logger);
 
 
     var app = builder.Build();
